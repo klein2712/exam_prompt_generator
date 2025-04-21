@@ -4,7 +4,8 @@ import streamlit as st
 st.set_page_config(
     page_title="Exam Prompt Generator",
     page_icon="📝",
-    layout="centered"
+    layout="wide"
+    
 )
 def put_together_prompt_german():
     exam_length = st.session_state.exam_length
@@ -43,15 +44,20 @@ if 'current_step' not in st.session_state:
     st.session_state.prompt = ""
 
 # Title and description
-st.title("Exam Prompt Generator")
-st.markdown("Erstelle einen angepassten Prompt für die Generierung einer Klausur.")
+st.title("Exam Prompt Generator (Test Version)")
+st.markdown("Erstelle einen angepassten Prompt um mithilfe eines LLM (GPT, Gemini, Claude etc.) eine Klausur zu generieren.")
+st.markdown("Je genauer die Angaben, desto besser das Ergebnis")
 
 # Progress bar
 total_steps = 7
 progress = st.session_state.current_step / total_steps
 st.progress(progress)
 
-st.markdown(f"**Schritt {st.session_state.current_step + 1} / {total_steps}**")
+
+if st.session_state.current_step < 7:
+    st.markdown(f"**Schritt {st.session_state.current_step + 1} / {total_steps}**")
+else:
+    st.markdown(f"**Schritt {st.session_state.current_step} / {total_steps}**")
 
 # Display appropriate input for current step
 if st.session_state.current_step == 0:  # Exam length
@@ -88,7 +94,7 @@ elif st.session_state.current_step == 1:  # Degree
         st.rerun()
 
 elif st.session_state.current_step == 2:  # Topic
-    st.subheader("Wie heißt dein Modul ausgeschrieben?")
+    st.subheader("Wie heißt das Modul ausgeschrieben?")
     
     topic = st.text_input("Modul", value=st.session_state.topic)
     
@@ -106,7 +112,7 @@ elif st.session_state.current_step == 2:  # Topic
             st.rerun()
 
 elif st.session_state.current_step == 3:  # Exam style
-    st.subheader("Wie ist die Klausur aufgebaut?")
+    st.subheader("Wie ist der Aufbau der Klausur?")
     
     col1, col2, col3 = st.columns([1, 1, 1])
     if col1.button("Offene Fragen"):
@@ -130,7 +136,7 @@ elif st.session_state.current_step == 3:  # Exam style
         st.rerun()
 
 elif st.session_state.current_step == 4:  # Exam focus
-    st.subheader("Gibt es ein Thema, auf das der Professor besonders viel Wert legt? Falls ja welches?")
+    st.subheader("Gibt es Schwerpunkte in dem Thema?")
     
     exam_focus = st.text_input("Schwerpunkte", value=st.session_state.exam_focus)
     
@@ -151,7 +157,7 @@ elif st.session_state.current_step == 4:  # Exam focus
             st.rerun()
 
 elif st.session_state.current_step == 5:  # Exam striked
-    st.subheader("Gibt es Themen, die der Prof aus dem Vorlesungsskript gestrichen hat?")
+    st.subheader("Gibt nicht klausurrelevante / gestrichene Themen?")
     
     exam_striked = st.text_input("Gestrichene Themen", value=st.session_state.exam_striked)
     
@@ -172,7 +178,7 @@ elif st.session_state.current_step == 5:  # Exam striked
             st.rerun()
 
 elif st.session_state.current_step == 6:  # Professor info
-    st.subheader("Ist der Professor bekannt auf eine spezifische Weise Klausuren zu stellen? (Gibt es Fragen die immer dran kommen, fragt er nah am Vorlesungsskript ab?)")
+    st.subheader("Ist die Dozierende Person bekannt auf eine spezifische Weise Klausuren zu stellen? (Gibt es Fragen die immer dran kommen, sind die Fragen nah am Skript?)")
     
     information_professor = st.text_input("Besonderheiten des Professors", value=st.session_state.information_professor)
     
@@ -197,6 +203,7 @@ elif st.session_state.current_step == 6:  # Professor info
 elif st.session_state.current_step == 7:  # Show result
     st.subheader("Generierter Prompt")
     
+    st.markdown("Gebe diesen Prompt zusammen mit einer Zusammenfassung an ein LLM und lass dir deine Klausur generieren")
     # Display the generated prompt
     st.text_area("Prompt", value=st.session_state.prompt, height=300)
     
