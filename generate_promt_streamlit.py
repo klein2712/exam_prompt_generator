@@ -1,5 +1,6 @@
 import streamlit as st
-# streamlit run .\generate_prompt_streamlit.py
+# streamlit run .\generate_prompt_streamlit.py 
+# --> is for local usage
 # Set page configuration
 st.set_page_config(
     page_title="Exam Prompt Generator",
@@ -208,7 +209,7 @@ elif st.session_state.current_step == 7:  # Show result
     st.text_area("Prompt", value=st.session_state.prompt, height=300)
     
     if st.button("In die Zwischenablage kopieren"):
-        st.success("Prompt in die Zwischenablage kopiert! (Bitte den Text markieren und manuell kopieren, falls die automatische Kopie nicht funktioniert.)")
+        st.success("Prompt in die Zwischenablage kopiert! (Funktioniert momentan nur auf PC, am Handy muss der Prompt manuell kopiert werden. Sorry,arbeite dran :))")
     
     if st.button("Neu starten"):
         # Reset all variables
