@@ -1,4 +1,5 @@
 import streamlit as st
+import pyperclip
 # streamlit run .\generate_prompt_streamlit.py 
 # --> is for local usage
 # Set page configuration
@@ -201,6 +202,8 @@ elif st.session_state.current_step == 6:  # Professor info
             st.session_state.prompt = put_together_prompt_german()
             st.rerun()
 
+# Keep all your existing code up until the prompt display section
+
 elif st.session_state.current_step == 7:  # Show result
     st.subheader("Generierter Prompt")
     
@@ -208,10 +211,23 @@ elif st.session_state.current_step == 7:  # Show result
     # Display the generated prompt
     st.text_area("Prompt", value=st.session_state.prompt, height=300)
     
-    if st.button("In die Zwischenablage kopieren"):
-        st.success("Prompt in die Zwischenablage kopiert! (Funktioniert momentan nur auf PC, am Handy muss der Prompt manuell kopiert werden. Sorry,arbeite dran :))")
+    # Create a column layout for buttons
+    col1, col2 = st.columns([1, 1])
     
-    if st.button("Neu starten"):
+    # Clipboard functionality using pyperclip
+    if col1.button("📋 Prompt kopieren"):
+        try:
+            # This copies the text server-side
+            pyperclip.copy(st.session_state.prompt)
+            
+            # This is just for UX feedback - the actual copying happens with pyperclip
+            st.success("Prompt wurde in die Zwischenablage kopiert! (Drücke STRG+V um einzufügen)")
+        except Exception as e:
+            st.error(f"Fehler beim Kopieren: {e}")
+            st.info("Kopiere den Text manuell, indem du ihn markierst und STRG+C drückst.")
+    
+    # Reset button in second column
+    if col2.button("Neu starten"):
         # Reset all variables
         st.session_state.current_step = 0
         st.session_state.exam_length = ""
@@ -223,5 +239,3 @@ elif st.session_state.current_step == 7:  # Show result
         st.session_state.information_professor = ""
         st.session_state.prompt = ""
         st.rerun()
-
-# Function to generate the prompt
