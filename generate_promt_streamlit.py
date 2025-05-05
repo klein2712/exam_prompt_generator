@@ -168,7 +168,7 @@ elif st.session_state.current_step == 3:  # Exam style - UPDATED WITH PERCENTAGE
                          min_value=0, 
                          max_value=100, 
                          value=st.session_state.offene_fragen_percentage,
-                         step=5,
+                         step=10,
                          key="offene_input",
                          on_change=on_offene_change)
     
@@ -177,7 +177,7 @@ elif st.session_state.current_step == 3:  # Exam style - UPDATED WITH PERCENTAGE
                          min_value=0, 
                          max_value=100, 
                          value=st.session_state.multiple_choice_percentage,
-                         step=5,
+                         step=10,
                          key="multiple_input",
                          on_change=on_multiple_change)
     
@@ -186,7 +186,7 @@ elif st.session_state.current_step == 3:  # Exam style - UPDATED WITH PERCENTAGE
                          min_value=0, 
                          max_value=100, 
                          value=st.session_state.single_choice_percentage,
-                         step=5,
+                         step=10,
                          key="single_input",
                          on_change=on_single_change)
     
