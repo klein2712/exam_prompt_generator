@@ -79,7 +79,7 @@ if 'current_step' not in st.session_state:
     st.session_state.prompt = ""
 
 # Title and description
-st.title("Exam Prompt Generator (Version 2)")
+st.title("Exam Prompt Generator ")
 st.markdown("Erstelle einen angepassten Prompt um mithilfe eines LLM (GPT, Gemini, Claude etc.) und einer von dir gefertigeten Zusammenfassung eine Klausur zu generieren.")
 st.markdown("Je genauer die Angaben möglich sind, desto besser wird das Ergebnis.")
 
