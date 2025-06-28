@@ -80,8 +80,8 @@ if 'current_step' not in st.session_state:
 
 # Title and description
 st.title("Exam Prompt Generator (Version 2)")
-st.markdown("Erstelle einen angepassten Prompt um mithilfe eines LLM (GPT, Gemini, Claude etc.) eine Klausur zu generieren.")
-st.markdown("Je genauer die Angaben, desto besser das Ergebnis")
+st.markdown("Erstelle einen angepassten Prompt um mithilfe eines LLM (GPT, Gemini, Claude etc.) und einer von dir gefertigeten Zusammenfassung eine Klausur zu generieren.")
+st.markdown("Je genauer die Angaben möglich sind, desto besser wird das Ergebnis.")
 
 # Progress bar
 total_steps = 7
@@ -279,7 +279,7 @@ elif st.session_state.current_step == 6:  # Professor info
 elif st.session_state.current_step == 7:  # Show result
     st.subheader("Generierter Prompt")
     
-    st.markdown("Gebe diesen Prompt zusammen mit einer Zusammenfassung an ein LLM und lass dir deine Klausur generieren")
+    st.markdown("Gebe diesen Prompt zusammen mit deiner Zusammenfassung des Moduls an ein LLM und lass dir deine Klausur generieren")
     
     # Display the generated prompt
     prompt_text = st.text_area("Prompt", value=st.session_state.prompt, height=300)
